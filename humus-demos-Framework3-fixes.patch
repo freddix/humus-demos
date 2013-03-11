@@ -1,0 +1,51 @@
+diff -aurN Framework3.orig/Audio/alc.h Framework3/Audio/alc.h
+--- Framework3.orig/Audio/alc.h	2011-01-27 23:38:14.000000000 +0100
++++ Framework3/Audio/alc.h	2011-01-27 23:53:34.000000000 +0100
+@@ -184,7 +184,7 @@
+ 
+ ALC_API void            ALC_APIENTRY alcDestroyContext( ALCcontext *context );
+ 
+-ALC_API ALCcontext *    ALC_APIENTRY alcGetCurrentContext( ALCvoid );
++ALC_API ALCcontext *    ALC_APIENTRY alcGetCurrentContext( void );
+ 
+ ALC_API ALCdevice*      ALC_APIENTRY alcGetContextsDevice( ALCcontext *context );
+ 
+@@ -244,7 +244,7 @@
+ typedef void           (ALC_APIENTRY *LPALCPROCESSCONTEXT)( ALCcontext *context );
+ typedef void           (ALC_APIENTRY *LPALCSUSPENDCONTEXT)( ALCcontext *context );
+ typedef void           (ALC_APIENTRY *LPALCDESTROYCONTEXT)( ALCcontext *context );
+-typedef ALCcontext *   (ALC_APIENTRY *LPALCGETCURRENTCONTEXT)( ALCvoid );
++typedef ALCcontext *   (ALC_APIENTRY *LPALCGETCURRENTCONTEXT)( void );
+ typedef ALCdevice *    (ALC_APIENTRY *LPALCGETCONTEXTSDEVICE)( ALCcontext *context );
+ typedef ALCdevice *    (ALC_APIENTRY *LPALCOPENDEVICE)( const ALCchar *devicename );
+ typedef ALCboolean     (ALC_APIENTRY *LPALCCLOSEDEVICE)( ALCdevice *device );
+diff -aurN Framework3.orig/Imaging/Image.cpp Framework3/Imaging/Image.cpp
+--- Framework3.orig/Imaging/Image.cpp	2011-01-27 23:38:14.000000000 +0100
++++ Framework3/Imaging/Image.cpp	2011-01-27 23:50:59.000000000 +0100
+@@ -29,7 +29,7 @@
+ 
+ #ifndef NO_JPEG
+ extern "C" {
+-#include "jpeglib.h"
++#include <jpeglib.h>
+ }
+ #ifdef _WIN32
+ #pragma comment (lib, "../Framework3/Libs/libjpeg.lib")
+@@ -37,7 +37,7 @@
+ #endif // NO_JPEG
+ 
+ #ifndef NO_PNG
+-#include "png.h"
++#include <png.h>
+ #ifdef _WIN32
+ #pragma comment (lib, "../Framework3/Libs/libpng.lib")
+ #pragma comment (lib, "../Framework3/Libs/zlib.lib")
+@@ -822,7 +822,7 @@
+     // first check the eight byte PNG signature
+     png_byte pbSig[8];
+     fread(pbSig, 1, 8, file);
+-    if (!png_check_sig(pbSig, 8)){
++    if (!png_sig_cmp(pbSig, 0, 8)){
+ 		fclose(file);
+ 		return false;
+ 	}

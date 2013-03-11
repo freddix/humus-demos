@@ -1,0 +1,15 @@
+diff -aurN Framework2.orig/Util/IsoSurface.cpp Framework2/Util/IsoSurface.cpp
+--- Framework2.orig/Util/IsoSurface.cpp	2010-04-14 20:27:24.000000000 +0200
++++ Framework2/Util/IsoSurface.cpp	2010-04-14 20:28:03.000000000 +0200
+@@ -282,9 +282,9 @@
+ 
+ #define OLD_EDGE(dst, x, y, z, n) cell->edges[dst] = cells[((z) * sY + (y)) * sX + (x)].edges[n];
+ 
+-DWORD WINAPI thread(LPVOID param){
++/* DWORD WINAPI thread(LPVOID param){
+ 	return ((IsoSurface *) param)->workerThread();
+-}
++} */
+ 
+ IsoSurface::IsoSurface(const int threadCount){
+ 	nodes = NULL;

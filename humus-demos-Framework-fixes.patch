@@ -1,0 +1,65 @@
+diff -aurN Framework.orig/Audio/AudioStream.cpp Framework/Audio/AudioStream.cpp
+--- Framework.orig/Audio/AudioStream.cpp	2004-10-21 22:45:58.000000000 +0200
++++ Framework/Audio/AudioStream.cpp	2011-01-27 23:30:34.000000000 +0100
+@@ -72,7 +72,7 @@
+ }
+ 
+ bool AudioStream::open(const char *fileName){
+-	char *ext = strrchr(fileName, '.');
++	const char *ext = strrchr(fileName, '.');
+ 	if (ext == NULL) return false;
+ 
+ 	if ((file = fopen(fileName, "rb")) == NULL) return false;
+diff -aurN Framework.orig/Imaging/Image.cpp Framework/Imaging/Image.cpp
+--- Framework.orig/Imaging/Image.cpp	2005-09-19 17:52:36.000000000 +0200
++++ Framework/Imaging/Image.cpp	2011-01-27 23:12:10.000000000 +0100
+@@ -766,7 +766,7 @@
+ 
+ 
+ bool Image::loadImage(const char *fileName, const bool useRGBA, const MIPMAP_ACTION mipmapAction){
+-	char *extension = strrchr(fileName, '.');
++	const char *extension = strrchr(fileName, '.');
+ 	bool wantMipMaps = (mipmapAction > MIPMAP_NONE);
+ 
+ 	clear();
+@@ -1204,7 +1204,7 @@
+ }
+ 
+ bool Image::saveImage(const char *fileName, const bool isRGBA, const int quality){
+-	char *extension = strrchr(fileName, '.');
++	const char *extension = strrchr(fileName, '.');
+ 
+ 	if (extension != NULL){
+ 		if (stricmp(extension,".dds") == 0){
+diff -aurN Framework.orig/OpenGL/glExtensions.h Framework/OpenGL/glExtensions.h
+--- Framework.orig/OpenGL/glExtensions.h	2006-04-07 20:03:22.000000000 +0200
++++ Framework/OpenGL/glExtensions.h	2011-01-27 23:09:28.000000000 +0100
+@@ -873,8 +873,8 @@
+ typedef GLuint (APIENTRY *PFNGLGENFRAGMENTSHADERSATIPROC)(GLuint range);
+ typedef GLvoid (APIENTRY *PFNGLBINDFRAGMENTSHADERATIPROC)(GLuint id);
+ typedef GLvoid (APIENTRY *PFNGLDELETEFRAGMENTSHADERATIPROC)(GLuint id);
+-typedef GLvoid (APIENTRY *PFNGLBEGINFRAGMENTSHADERATIPROC)(GLvoid);
+-typedef GLvoid (APIENTRY *PFNGLENDFRAGMENTSHADERATIPROC)(GLvoid);
++typedef GLvoid (APIENTRY *PFNGLBEGINFRAGMENTSHADERATIPROC)(void);
++typedef GLvoid (APIENTRY *PFNGLENDFRAGMENTSHADERATIPROC)(void);
+ typedef GLvoid (APIENTRY *PFNGLPASSTEXCOORDATIPROC)(GLuint dst, GLuint coord, GLenum swizzle);
+ typedef GLvoid (APIENTRY *PFNGLSAMPLEMAPATIPROC)(GLuint dst, GLuint interp, GLenum swizzle);
+ 
+@@ -1540,7 +1540,7 @@
+ typedef GLboolean      (APIENTRY *PFNGLCOMPILESHADERGL2PROC)(GLhandle shaderObj);
+ typedef const GLchar * (APIENTRY *PFNGLGETINFOLOGGL2PROC)(GLhandle obj, GLint *length);
+ typedef const GLchar * (APIENTRY *PFNGLGETSHADERSTRINGGL2PROC)(GLhandle shaderObj, GLuint *length);
+-typedef GLhandle       (APIENTRY *PFNGLCREATEPROGRAMOBJECTGL2PROC)(GLvoid);
++typedef GLhandle       (APIENTRY *PFNGLCREATEPROGRAMOBJECTGL2PROC)(void);
+ typedef GLboolean      (APIENTRY *PFNGLATTACHSHADEROBJECTGL2PROC)(GLhandle programObj, GLhandle shaderObj);
+ typedef GLboolean      (APIENTRY *PFNGLLINKPROGRAMGL2PROC)(GLhandle programObj);
+ typedef GLboolean      (APIENTRY *PFNGLUSEPROGRAMOBJECTGL2PROC)(GLhandle programObj);
+@@ -1675,7 +1675,7 @@
+ typedef GLvoid    (APIENTRY * PFNGLDELETEOCCLUSIONQUERIESNVPROC) (GLsizei n, const GLuint *ids);
+ typedef GLboolean (APIENTRY * PFNGLISOCCLUSIONQUERYNVPROC) (GLuint id);
+ typedef GLvoid    (APIENTRY * PFNGLBEGINOCCLUSIONQUERYNVPROC) (GLuint id);
+-typedef GLvoid    (APIENTRY * PFNGLENDOCCLUSIONQUERYNVPROC) (GLvoid);
++typedef GLvoid    (APIENTRY * PFNGLENDOCCLUSIONQUERYNVPROC) (void);
+ typedef GLvoid    (APIENTRY * PFNGLGETOCCLUSIONQUERYIVNVPROC) (GLuint id, GLenum pname, GLint *params);
+ typedef GLvoid    (APIENTRY * PFNGLGETOCCLUSIONQUERYUIVNVPROC) (GLuint id, GLenum pname, GLuint *params);
+ 

@@ -1,0 +1,12 @@
+diff -aurN humus-demos-0.orig/DPS/Makefile humus-demos-0/DPS/Makefile
+--- humus-demos-0.orig/DPS/Makefile	2013-02-12 16:11:26.896918637 +0100
++++ humus-demos-0/DPS/Makefile	2013-02-12 16:13:27.042313264 +0100
+@@ -16,7 +16,7 @@
+ APP = $(APP_PATH)/Main.cpp
+ 
+ rel: $(APP) $(FW)
+-	$(CC) $(RELEASE) $(APP) $(FW) -o $(APP_NAME) -L/usr/X11R6/lib -lGL -lXxf86vm -L/usr/lib -lpng
++	$(CC) $(LDFLAGS) $(RELEASE) $(APP) $(FW) -lGL -lX11 -lXxf86vm -lpng -o $(APP_NAME)
+ dbg: $(APP) $(FW)
+ 	$(CC) $(DEBUG) $(APP) $(FW) -o $(APP_NAME) -L/usr/X11R6/lib -lGL -lXxf86vm -L/usr/lib -lpng
+ 

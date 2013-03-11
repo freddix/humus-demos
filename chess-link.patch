@@ -1,0 +1,15 @@
+diff -aurN Chess.orig/Makefile Chess/Makefile
+--- Chess.orig/Makefile	2013-02-12 10:36:43.682995889 +0100
++++ Chess/Makefile	2013-02-12 10:37:07.380861973 +0100
+@@ -16,9 +16,9 @@
+ APP = $(APP_PATH)/Main.cpp $(APP_PATH)/Chess.cpp
+ 
+ release: $(APP) $(FW)
+-	$(CC) $(RELEASE) $(APP) $(FW) -o $(APP_NAME) -L/usr/X11R6/lib -lGL -lXxf86vm -L/usr/lib
++	$(CC) $(LDFLAGS) $(RELEASE) $(APP) $(FW) -lX11 -lGL -lXxf86vm -o $(APP_NAME)
+ debug: $(APP) $(FW)
+-	$(CC) $(DEBUG) $(APP) $(FW) -o $(APP_NAME) -L/usr/X11R6/lib -lGL -lXxf86vm -L/usr/lib
++	$(CC) $(DEBUG) $(APP) $(FW) -o $(APP_NAME) -L/usr/X11R6/lib -lGL -lXxf86vm -lX11 -lXext
+ 
+ clean:
+ 	@rm $(APP_NAME)
